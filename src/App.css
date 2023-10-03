@@ -1,0 +1,57 @@
+  
+h1 {
+    font: oblique bold 120% cursive;
+    text-align: center;
+  }
+  
+.container {
+    list-style-type: none;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    font: oblique bold 120% cursive;
+    border: 1px solid rgb(135, 163, 222);
+}
+body {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente en la página */
+    align-items: center; /* Centra verticalmente en la página */
+    height: 100vh; /* Establece la altura al 100% de la altura de la ventana */
+    margin: 0; /* Elimina el margen predeterminado del cuerpo */
+    font: oblique bold 120% cursive; /* Establece la fuente */
+    background-color: #f0f0f0; /* Cambia el color de fondo de la página */
+}
+
+.textbox {
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido dentro del contenedor */
+    padding: 10px;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    border: 1px solid rgb(135, 163, 222);
+}
+
+.textbox input {
+    font: oblique bold 120% cursive; /* Establece la fuente */
+    border: none; /* Opcional: quita el borde predeterminado del cuadro de entrada */
+    background: transparent; /* Opcional: hace que el fondo del cuadro de entrada sea transparente */
+    flex: 1; /* Permite que el cuadro de entrada ocupe todo el espacio restante */
+}
+.button {
+    margin-left: 10px; /* Espacio entre el cuadro de entrada y el botón */
+    padding: 5px 10px;
+    border-radius: 50%; /* Hace que el botón sea redondo */
+    background-color: rgb(135, 163, 222);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 20px; /* Tamaño de la fuente del botón */
+}
+
+
+
+
