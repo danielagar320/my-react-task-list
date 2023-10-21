@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Task } from "./Task";
 
 export const TaskList = (props) => {
-  const [taskInput, setTaskInput] = useState(""); 
-  const [list, setList] = useState(props.list || []); 
+  const [taskInput, setTaskInput] = useState("");
+  const [list, setList] = useState(props.list || []);
 
   const handleInputChange = (e) => {
     setTaskInput(e.target.value);
@@ -12,13 +12,19 @@ export const TaskList = (props) => {
   const addTask = () => {
     if (taskInput.trim() !== "") {
       setList([...list, { name: taskInput }]);
-      setTaskInput(""); // Limpiar el campo de entrada después de agregar una tarea
+      setTaskInput("");
     }
   };
 
   const deleteTask = (index) => {
     const updatedList = [...list];
     updatedList.splice(index, 1);
+    setList(updatedList);
+  };
+
+  const editTask = (index, editedTask) => {
+    const updatedList = [...list];
+    updatedList[index] = { name: editedTask };
     setList(updatedList);
   };
 
@@ -36,7 +42,12 @@ export const TaskList = (props) => {
 
       <ul>
         {list.map((task, index) => (
-          <Task key={index} name={task.name} />
+          <Task
+            key={index}
+            name={task.name}
+            onDelete={() => deleteTask(index)}
+            onEdit={(editedTask) => editTask(index, editedTask)}
+          />
         ))}
       </ul>
     </div>
