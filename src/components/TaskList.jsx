@@ -5,9 +5,16 @@ export const TaskList = (props) => {
   const [taskInput, setTaskInput] = useState("");
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [inputError, setInputError] = useState("");
 
   const handleInputChange = (e) => {
     setTaskInput(e.target.value);
+
+    if (e.target.value.length < 3) {
+      setInputError("El nombre debe tener al menos 3 caracteres.");
+    } else {
+      setInputError("");
+    }
   };
 
   const addTask = () => {
@@ -15,7 +22,10 @@ export const TaskList = (props) => {
       const newTask = { name: taskInput, description: "", status: "pending" };
       setList([...list, newTask]);
       setTaskInput("");
+      setInputError(""); // Limpiar el error después de agregar la tarea
       saveToLocalStorage([...list, newTask]);
+    } else {
+      setInputError("El nombre de la tarea no puede estar vacío.");
     }
   };
 
@@ -60,7 +70,10 @@ export const TaskList = (props) => {
           value={taskInput}
           onChange={handleInputChange}
         />
-        <button onClick={addTask}>Add</button>
+        <button onClick={addTask} disabled={taskInput.length < 3}>
+          Add
+        </button>
+        <span  style={{color:"red"}} className="error">{inputError}</span>
       </div>
 
       <ul>
