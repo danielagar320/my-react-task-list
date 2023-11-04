@@ -1,8 +1,27 @@
+import {Image, Heading, Stack } from "@chakra-ui/react";
+
 function Header(){
     return(
-        <nav>
-            <h1>Todo App</h1>
-        </nav>
+        
+        <Stack>
+
+            <Heading as='h3' size='lg' color="Black" position="absolute" top="200px" left="580px" zIndex="2">
+                BIENVENIDO A TODO APP
+            </Heading>
+            
+            <Image
+                boxSize="lg"
+                width="100%"
+                height="300px"
+                objectFit="cover"
+                src="./img/fondo.jpg"
+                alt="Dan Abramov"
+                position="center"
+                zIndex="1"
+            />
+
+        </Stack>
+    
         
 
     );

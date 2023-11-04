@@ -38,3 +38,10 @@ En esta parte del laboratorio se incluyo un formulario para crear una validació
 
 ![Alt text](img/image-8.png)
 
+
+### Project-6
+
+Aplicación actualizada con Chakra
+
+![Alt text]img/(image-9.png)
+

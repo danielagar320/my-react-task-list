@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Task } from "./Task";
+import { ChakraProvider, Button, List, ListItem, Box, Text, Checkbox, Image, Heading, Stack } from "@chakra-ui/react";
 
-export const TaskList = (props) => {
+export const TaskList = () => {
   const [taskInput, setTaskInput] = useState("");
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +62,8 @@ export const TaskList = (props) => {
   }, [list, loading]);
 
   return (
-    <div>
+    <ChakraProvider>
+
       <div className="textbox">
         <input
           type="text"
@@ -70,22 +71,24 @@ export const TaskList = (props) => {
           value={taskInput}
           onChange={handleInputChange}
         />
-        <button onClick={addTask} disabled={taskInput.length < 3}>
+        <Button onClick={addTask} disabled={taskInput.length < 3}>
           Add
-        </button>
-        <span  style={{color:"red"}} className="error">{inputError}</span>
+        </Button>
+        <span className="error">{inputError}</span>
       </div>
 
-      <ul>
+      <List>
         {list.map((task, index) => (
-          <Task
-            key={index}
-            {...task}
-            onDelete={() => deleteTask(index)}
-            onEdit={(editedTask) => editTask(index, editedTask)}
-          />
+          <ListItem key={index}>
+            <Box>
+              <Text>{task.name}</Text>
+              <Checkbox size="md" colorScheme="green" checked={task.status === "completed"} />
+              <Button onClick={() => deleteTask(index)}>Delete</Button>
+            </Box>
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </ChakraProvider>
   );
 };
+

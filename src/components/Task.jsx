@@ -1,29 +1,18 @@
 import React, { useState } from "react";
+import { ChakraProvider, Checkbox, Input, Select, Button } from "@chakra-ui/react";
 
 export const Task = (props) => {
   const { name, description, status, onDelete, onEdit } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState({ name, description, status });
-  const [error, setError] = useState("");
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  const validateForm = () => {
-    if (editedTask.name.length < 3) {
-      setError("El nombre debe tener al menos 3 caracteres.");
-      return false;
-    }
-    setError(""); // Limpiar el error si el nombre es válido
-    return true;
-  };
-
   const handleSaveClick = () => {
-    if (validateForm()) {
-      onEdit(editedTask);
-      setIsEditing(false);
-    }
+    onEdit(editedTask);
+    setIsEditing(false);
   };
 
   const handleInputChange = (e) => {
@@ -32,48 +21,47 @@ export const Task = (props) => {
   };
 
   return (
-    <div>
+    <ChakraProvider>
       {isEditing ? (
-        <form>
-          <input
+        <div>
+          <Input
             type="text"
             name="name"
             value={editedTask.name}
             onChange={handleInputChange}
           />
-          <span className="error">{error}</span>
-          <input
+          <Input
             type="text"
             name="description"
             value={editedTask.description}
             onChange={handleInputChange}
           />
-          <label className="container">
-            <input
-              type="checkbox"
-              checked={editedTask.status === "completed"}
-              onChange={() => setEditedTask({ ...editedTask, status: "completed" })}
-            />
-            Completed
-          </label>
-          <button type="button" onClick={handleSaveClick}>Save</button>
-        </form>
+          <Select
+            name="status"
+            value={editedTask.status}
+            onChange={handleInputChange}
+          >
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+          </Select>
+          <Button onClick={handleSaveClick}>Save</Button>
+        </div>
       ) : (
         <div>
-          <label className="container">
-            <input
-              type="checkbox"
-              checked={editedTask.status === "completed"}
-              onChange={() => setEditedTask({ ...editedTask, status: "completed" })}
-            />
-            {editedTask.name}
-          </label>
-          <p>Description: {editedTask.description}</p>
-          <button onClick={handleEditClick}>Edit</button>
-          <button onClick={onDelete}>Delete</button>
+          <Box
+            border="1px solid black"
+            borderRadius="5px"
+            padding="10px"
+          >
+            <Checkbox checked={editedTask.status === "completed"} />
+            <Text>{editedTask.name}</Text>
+            <p>Description: {editedTask.description}</p>
+            <Button onClick={handleEditClick}>Edit</Button>
+            <Button onClick={onDelete}>Delete</Button>
+          </Box>
         </div>
       )}
-    </div>
+    </ChakraProvider>
   );
 };
 
