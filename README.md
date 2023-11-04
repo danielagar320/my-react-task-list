@@ -43,5 +43,5 @@ En esta parte del laboratorio se incluyo un formulario para crear una validació
 
 Aplicación actualizada con Chakra
 
-![Alt text]img/(image-9.png)
+![Alt text](img/image-9.png)
 
