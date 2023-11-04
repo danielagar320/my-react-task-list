@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ChakraProvider, Button, List, ListItem, Box, Text, Checkbox, Image, Heading, Stack } from "@chakra-ui/react";
+import { ChakraProvider, Button, List, ThemeProvider} from "@chakra-ui/react";
+import { Task } from "./Task";
 
 export const TaskList = () => {
   const [taskInput, setTaskInput] = useState("");
@@ -55,15 +56,8 @@ export const TaskList = () => {
     setLoading(false);
   }, []);
 
-  useEffect(() => {
-    if (!loading) {
-      saveToLocalStorage(list);
-    }
-  }, [list, loading]);
-
   return (
     <ChakraProvider>
-
       <div className="textbox">
         <input
           type="text"
@@ -79,13 +73,14 @@ export const TaskList = () => {
 
       <List>
         {list.map((task, index) => (
-          <ListItem key={index}>
-            <Box>
-              <Text>{task.name}</Text>
-              <Checkbox size="md" colorScheme="green" checked={task.status === "completed"} />
-              <Button onClick={() => deleteTask(index)}>Delete</Button>
-            </Box>
-          </ListItem>
+          <Task
+            key={index}
+            name={task.name}
+            description={task.description}
+            status={task.status}
+            onDelete={() => deleteTask(index)}
+            onEdit={(editedTask) => editTask(index, editedTask)}
+          />
         ))}
       </List>
     </ChakraProvider>

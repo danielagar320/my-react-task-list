@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { ChakraProvider, Checkbox, Input, Select, Button } from "@chakra-ui/react";
+import { Checkbox, Input, Select, Button, ChakraProvider, Text, Box, extendTheme } from "@chakra-ui/react";
 
 export const Task = (props) => {
   const { name, description, status, onDelete, onEdit } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState({ name, description, status });
+
+  const config = {
+    initialColorMode: 'light',
+    useSystemColorMode: false,
+  }
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -55,7 +60,7 @@ export const Task = (props) => {
           >
             <Checkbox checked={editedTask.status === "completed"} />
             <Text>{editedTask.name}</Text>
-            <p>Description: {editedTask.description}</p>
+            <p>{editedTask.description}</p>
             <Button onClick={handleEditClick}>Edit</Button>
             <Button onClick={onDelete}>Delete</Button>
           </Box>
@@ -64,4 +69,5 @@ export const Task = (props) => {
     </ChakraProvider>
   );
 };
+
 
